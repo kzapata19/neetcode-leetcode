@@ -33,25 +33,20 @@ edge cases:
 - one of the integers that contributes to the target sum can be zero
 - there can be duplicate integer elements
 
-strategy:
+initial strategy:
 - sort input array for easier calculation
 - Depending on the value of the target number, find the approx best index in the array to start calculating
 - probably start in the center of input array and then move left or right depending on the target value
+
+final strategy:
+- iterate through the array
+    - take the difference between target num and current num and check if diff exists in Map
+        - if not, add the current num as the key and it's index as the value to the Map
+        - if yes, then return the result array with the current num's index and the diff's index in the Map
 */
 
 var twoSum = function(nums, target) {
-    // pass optional sorting fx to sort integer in numeric (instead of stringified integers)
-    // let sortedNums = nums.sort((a, b) => a - b) 
-    // let largestIndex = sortedNums.length - 1;
-    // let pointer1 = Math.floor(largestIndex / 2); // start in center (or approx if array length is even)
-    // let pointer2 = pointer1; 
-
-    // //start in the center
-    // if(sortedNums[pointer1] <= target) {
-    //     if((sortedNums[pointer1] + sortedNums[pointer2 - 1]) === target) return [pointer1, (pointer2 - 1)];
-    //     else if(sortedNums[pointer1])
-    // }
-    // [4,2,1,5] target -> 3
+    // sample case [4,2,1,5] target -> 3
     let prevMap = new Map() // [value : index]
     for(let i = 0; i < nums.length; i++) {
         let diff = target - nums[i];
